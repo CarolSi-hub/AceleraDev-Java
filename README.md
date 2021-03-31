@@ -147,13 +147,13 @@ Retorna uma lista com o identificador dos top melhores jogadores, utilizar o men
 Integer top* Quantidade de jogares na lista
 Exceções:
 
-Caso não exista nenhum jogador cadastrado, retornar uma lista vazia.
-##### Tópicos
-Neste desafio você aprenderá:
+Caso não exista nenhum jogador cadastrado, retornar uma lista vazia.<br><br>
+##### Tópicos<br>
+Neste desafio você aprenderá:<br>
 
-Variáveis e métodos
-Operadores matemáticos
-Controle de fluxo
-Listas
+Variáveis e métodos<br>
+Operadores matemáticos<br>
+Controle de fluxo<br>
+Listas<br>
 Tratamento de exceções
 
