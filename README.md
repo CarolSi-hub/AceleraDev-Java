@@ -40,4 +40,8 @@ totalizando um salário líquido final de R$7.565,00.<br>
 Observações - Caso o valor do salário base recebido seja abaixo do salário mínimo (R$ 1.039,00), o algoritmo deve retornar 0.0.<br><br>
 
 ##### Tópicos
-Neste desafio, você aprenderá:: - Variáveis e métodos; - Operadores aritméticos; - Operadores lógicos; - Controle de fluxo (estrutura condicional).
+Neste desafio, você aprenderá::<br>
+- Variáveis e métodos;<br>
+-  - Operadores aritméticos;<br> 
+-  - Operadores lógicos;<br>
+-  - Controle de fluxo (estrutura condicional).
