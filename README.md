@@ -1,72 +1,33 @@
-# Gerador de frases do Monty Python
+# Oauth2 com Spring
 
-Monty Python foi um dos grupos de comediantes mais influentes e reverenciados da história da TV. Vamos criar uma API para gerar frases aleatórias coletadas dos episódios da trupe, de acordo com nosso ator favorito.
+Neste desafio você receberá um projeto Maven pré-configurado com Springboot, Spring-JPA, Spring-WEB, Spring-Security e banco de dados H2.
 
-## Tópicos
+Utilize a lib [Spring Security OAuth2 AutoConfigure](https://mvnrepository.com/artifact/org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure/2.1.6.RELEASE) para utilizar Oauth2 no seu projeto spring.
 
-Neste desafio você aprenderá:
+1. Configure o Resource Server através da annotation @EnableResourceServer para expor o endpoint /user e bloquear todos os outros.
 
-- Java
-- Criar APIs
-- Testar APIs
-- Ler dados de um banco de dados
-- Spring Boot
-- JPA
+2. Configure o Authentication Server através da annotation @EnableAuthorizationServer.
 
-## Requisitos
-​
-Para este desafio você precisará de:
+    - O Email dos Usuários deve ser utilizado como login
+    - A aplicação deve ser configurada para utilizar o UserRepository para buscar o Usuario por e-mail
+    - A senha não deve estar encriptada
 
-- Java 8 (ou superior)
-- Git
+3. Utilize a propriedade do spring para setar scope password, client_id e client_secret.
 
-## Detalhes
+        security.oauth2.client.scope=password
+        security.oauth2.client.client-secret=
+        security.oauth2.client.client-id=
 
-Banco de dados *H2* com uma tabela chamada *scripts* com a estrutura:
+4. `GET /oauth/token`: recebendo `client_id`, `client_secret`, `grant_type`, `user` e `password`. A resposta será um JSON contendo as seguintes informações:
 
+        {
+            "access_token": "798df339-c920-4e42-9eb7-8bab168d6480",
+            "token_type": "bearer",
+            "refresh_token": "b0efcd1e-1459-47b6-8a55-ec09af2202b6",
+            "expires_in": 85759,
+            "scope": "read write trust"
+        }
 
-```
-CREATE TABLE IF NOT EXISTS "scripts" (
-  "id" INTEGER PRIMARY KEY,
-  "episode" INTEGER,
-  "episode_name" TEXT,
-  "segment" TEXT,
-  "type" TEXT,
-  "actor" TEXT,
-  "character" TEXT,
-  "detail" TEXT,
-  "record_date" TIMESTAMP,
-  "series" TEXT,
-  "transmission_date" TIMESTAMP
-);
-CREATE INDEX "ix_scripts_index"ON "scripts" ("index");
-```
+5. `GET /user`: deverá ser acessado sem autenticação.
 
-Na coluna *detail* estão as frases que devem ser apresentadas pela API. Na coluna *actor*, consta o nome do ator.
-
-A API deve responder pelas seguintes URLs:
-
-## /v1/quote
-
-Método: GET
-
-Retorna uma frase aleatória de qualquer ator.
-
-
-## /v1/quote/{actor}
-
-Método: GET
-
-Retorna uma frase aleatória do ator passado como parâmetro.
-
-O formato esperado em ambas URLs é uma _Response JSON_:
-
-```json
-{"actor":"John Cleese","quote":"Yes, cigarettes. My hovercraft is full of eels."}
-```
-
-## Rodando a aplicação
-
-Executar o comando `gradlew bootRun`
-
-A aplicação estará disponível em `http://localhost:8080`
+6. `GET /company`: deverá ser acessado apenas com autenticação. Utilize a autenticação Bearer + token para conseguir acesso.
